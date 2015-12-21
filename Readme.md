@@ -1,0 +1,1 @@
+NOTE: You will need to get your own API Key from TMDB. Place this value in app/src/main/res/values/api_keys.xml .

@@ -2,6 +2,7 @@ package com.example.android.popularmovies;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -15,6 +16,10 @@ public class MainActivity extends ActionBarActivity {
                     .add(R.id.container, new MoviesFragment())
                     .commit();
         }
+
+        //Log.v("main", API_KEY);
+        Log.v("main", getString(R.string.my_api_key));
+
     }
 
 //    @Override
