@@ -17,6 +17,8 @@ public class MainActivity extends ActionBarActivity {
                     .commit();
         }
 
+        Log.v("main", getString(R.string.my_api_key));
+
     }
 
 //    @Override

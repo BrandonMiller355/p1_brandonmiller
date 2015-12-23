@@ -7,8 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -94,6 +96,14 @@ public class MoviesFragment extends Fragment {
         // Get a reference to the ListView, and attach this adapter to it.
         ListView listView = (ListView) rootView.findViewById(R.id.listview_movies);
         listView.setAdapter(mMovieAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                            @Override
+                                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                                //Toast.makeText(MoviesFragment.this, mMovieAdapter.getItem(position), Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getActivity(), mMovieAdapter.getItem(position), Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+        );
 
         return rootView;
     }
