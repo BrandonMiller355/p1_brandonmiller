@@ -89,26 +89,26 @@ public class MoviesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        String[] data = {
-                "Jurassic World",
-                "Ant Man",
-                "Star Wars Episode VII",
-                "The Night Before"
-        };
-        List<String> topMovies = new ArrayList<String>(Arrays.asList(data));
+//        String[] data = {
+//                "Jurassic World",
+//                "Ant Man",
+//                "Star Wars Episode VII",
+//                "The Night Before"
+//        };
+//        List<String> topMovies = new ArrayList<String>(Arrays.asList(data));
 
 
 
         mMovieAdapter = new ArrayAdapter<String>(getActivity(),
                                                  R.layout.list_item_movie,
                                                  R.id.list_item_movie_textview,
-                                                 topMovies);
+                                                 new ArrayList<String>());
 
         //TODO: Delete this
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_main, container, false);
 
-        //TODO: Remove this and add it in an OnStart method
+        //TODO: Remove this and add it in an OnStart method (after implementing menu options)
         FetchMovieTask fetchMovieTask = new FetchMovieTask();
         fetchMovieTask.execute();
 
@@ -146,25 +146,29 @@ public class MoviesFragment extends Fragment {
 
             // These are the names of the JSON objects that need to be extracted.
             //TODO: Update these
-            final String OWM_LIST = "list";
-            final String OWM_WEATHER = "weather";
-            final String OWM_TEMPERATURE = "temp";
-            final String OWM_MAX = "max";
-            final String OWM_MIN = "min";
-            final String OWM_DESCRIPTION = "main";
+            final String RESULTS = "results";
+            final String TITLE = "title";
+            final String ID = "id";
+            final String POSTER_PATH = "poster_path";
+//            final String OWM_MAX = "max";
+//            final String OWM_MIN = "min";
+//            final String OWM_DESCRIPTION = "main";
 
             JSONObject moviesJSON = new JSONObject(moviesJsonStr);
             //TODO: It breaks here probably
             //hardcode this value above instead
-            JSONArray moviesArray = moviesJSON.getJSONArray("results");
+            JSONArray moviesArray = moviesJSON.getJSONArray(RESULTS);
 
             String[] resultStrs = new String[numMovies];
 
-            for(int i = 0; i < moviesArray.length(); i++) {
+            //for(int i = 0; i < moviesArray.length(); i++) {
+            for(int i = 0; i < numMovies; i++) {
                 // For now, using the format "Day, description, hi/low"
                 String title;
+                String poster_path;
+                String id;
 
-                // Get the JSON object representing the day
+                // Get the JSON object representing the movie
                 JSONObject movieInfo = moviesArray.getJSONObject(i);
 
                 // The date/time is returned as a long.  We need to convert that
@@ -173,28 +177,31 @@ public class MoviesFragment extends Fragment {
                 long dateTime;
                 // Cheating to convert this to UTC time, which is what we want anyhow
 
-//Begin commented stuff
-/*                dateTime = dayTime.setJulianDay(julianStartDay+i);
-                day = getReadableDateString(dateTime);
+                //dateTime = dayTime.setJulianDay(julianStartDay+i);
+                //day = getReadableDateString(dateTime);
 
-                // description is in a child array called "weather", which is 1 element long.
-                JSONObject weatherObject = movieInfo.getJSONArray(OWM_WEATHER).getJSONObject(0);
-                description = weatherObject.getString(OWM_DESCRIPTION);
+                title = movieInfo.getString(TITLE);
+                poster_path = movieInfo.getString(POSTER_PATH);
+                id = movieInfo.getString(ID);
+
+//                // description is in a child array called "weather", which is 1 element long.
+//                JSONObject movieObject = movieInfo.getJSONArray(TITLE).getJSONObject(0);
+//                description = movieObject.getString(OWM_DESCRIPTION);
 
                 // Temperatures are in a child object called "temp".  Try not to name variables
                 // "temp" when working with temperature.  It confuses everybody.
-                JSONObject temperatureObject = movieInfo.getJSONObject(OWM_TEMPERATURE);
-                double high = temperatureObject.getDouble(OWM_MAX);
-                double low = temperatureObject.getDouble(OWM_MIN);
+//                JSONObject temperatureObject = movieInfo.getJSONObject(OWM_TEMPERATURE);
+//                double high = temperatureObject.getDouble(OWM_MAX);
+//                double low = temperatureObject.getDouble(OWM_MIN);
 
-                highAndLow = formatHighLows(high, low);*/
-                resultStrs[i] = "test" + getString(i);
+                //highAndLow = formatHighLows(high, low);
+                resultStrs[i] = "title: " + title + ", id: " + id;
             }
 
             //For debugging purposes only
-//            for (String s : resultStrs) {
-//                Log.v(LOG_TAG, "Forecast entry: " + s);
-//            }
+            for (String s : resultStrs) {
+                Log.v(LOG_TAG, "movie entry: " + s);
+            }
             return resultStrs;
 
         }
