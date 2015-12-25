@@ -89,29 +89,16 @@ public class MoviesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-//        String[] data = {
-//                "Jurassic World",
-//                "Ant Man",
-//                "Star Wars Episode VII",
-//                "The Night Before"
-//        };
-//        List<String> topMovies = new ArrayList<String>(Arrays.asList(data));
-
-
-
         mMovieAdapter = new ArrayAdapter<String>(getActivity(),
                                                  R.layout.list_item_movie,
                                                  R.id.list_item_movie_textview,
                                                  new ArrayList<String>());
 
-        //TODO: Delete this
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_main, container, false);
-
         //TODO: Remove this and add it in an OnStart method (after implementing menu options)
         FetchMovieTask fetchMovieTask = new FetchMovieTask();
         fetchMovieTask.execute();
 
+        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         // Get a reference to the ListView, and attach this adapter to it.
@@ -120,11 +107,9 @@ public class MoviesFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                             @Override
                                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                                //Toast.makeText(MoviesFragment.this, mMovieAdapter.getItem(position), Toast.LENGTH_SHORT).show();
-                                                //Toast.makeText(getActivity(), mMovieAdapter.getItem(position), Toast.LENGTH_SHORT).show();
-                                                Intent showDetailActivityIntent = new Intent(getActivity(),DetailActivity.class);
+                                                Intent showDetailActivityIntent = new Intent(getActivity(),DetailActivity.class)
+                                                        .putExtra(Intent.EXTRA_TEXT, mMovieAdapter.getItem(position));
                                                 startActivity(showDetailActivityIntent);
-
                                             }
                                         }
         );

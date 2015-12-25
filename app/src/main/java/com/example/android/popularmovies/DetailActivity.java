@@ -1,13 +1,16 @@
 package com.example.android.popularmovies;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * Created by Brandon on 12/22/2015.
@@ -18,6 +21,10 @@ public class DetailActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        //TODO: Delete this debugging line
+        Log.d(DetailActivity.class.toString(), "The text that was passed is: " + getIntent().getExtras().getString(Intent.EXTRA_TEXT));
+
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new DetailFragment())
@@ -62,6 +69,9 @@ public class DetailActivity extends ActionBarActivity {
                                  Bundle savedInstanceState) {
 
             View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
+
+            TextView textView = (TextView) rootView.findViewById(R.id.detail_text);
+            textView.setText(getActivity().getIntent().getExtras().getString(Intent.EXTRA_TEXT));
             return rootView;
         }
     }
