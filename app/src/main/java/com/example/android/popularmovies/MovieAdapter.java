@@ -3,29 +3,32 @@ package com.example.android.popularmovies;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 /**
  * Created by brandon.miller on 12/27/2015.
  * Source: http://developer.android.com/guide/topics/ui/layout/gridview.html
  */
 
-public class ImageAdapter extends BaseAdapter {
+public class MovieAdapter extends ArrayAdapter<MovieInfo> {
     private Context mContext;
 
-    public ImageAdapter(Context c) {
-        mContext = c;
+    public MovieAdapter(Context c, List<MovieInfo> movieInfoList) {
+        super(c, 0, movieInfoList);
     }
 
     public int getCount() {
         return mThumbIds.length;
     }
 
-    public Object getItem(int position) {
+    public MovieInfo getItem(int position) {
         return null;
     }
 
@@ -34,13 +37,16 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     // create a new ImageView for each item referenced by the Adapter
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        MovieInfo movie = getItem(position);
+
         ImageView imageView;
         if (convertView == null) {
             // if it's not recycled, initialize some attributes
 
-        //imageView = (ImageView) convertView.findViewById(R.id.imageview_movie);
-            imageView = new ImageView(mContext);
+        imageView = (ImageView) convertView.findViewById(R.id.image_movie);
+            //imageView = new ImageView(mContext);
 
             //imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
             //imageView.setLayoutParams(new GridView.LayoutParams(, 855));
@@ -48,6 +54,8 @@ public class ImageAdapter extends BaseAdapter {
 
             //imageView.setLayoutParams(new GridView.LayoutParams());
 
+//            imageView.setImageResource();
+            //imageView.setImageResource();
 //            imageView.setScaleType(ImageView.ScaleType.FIT_START);
 //            imageView.setScaleType(ImageView.ScaleType.FIT_END);
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -56,9 +64,13 @@ public class ImageAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
 
+        //here is where it set it according to the documentation
         //imageView.setImageResource(mThumbIds[position]);
 
-        Picasso.with(mContext).load("http://image.tmdb.org/t/p/w185/fYzpM9GmpBlIC893fNjoWCwE24H.jpg").into(imageView);
+
+
+        //Picasso.with(mContext).load("http://image.tmdb.org/t/p/w185/fYzpM9GmpBlIC893fNjoWCwE24H.jpg").into(imageView);
+        Picasso.with(mContext).load("http://image.tmdb.org/t/p/w185/" + movie.poster_path).into(imageView);
 
         return imageView;
     }

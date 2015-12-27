@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -41,7 +42,13 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class MoviesFragment extends Fragment {
-    private ArrayAdapter<String> mMovieAdapter;
+    private MovieAdapter mMovieAdapter;
+
+    MovieInfo[] movies = {
+            new MovieInfo("title", "2345 id", "someposterpath"),
+            new MovieInfo("title2", "345 id", "someposterpath2"),
+            new MovieInfo("title3", "45 id", "someposterpath3")
+    };
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -89,20 +96,22 @@ public class MoviesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mMovieAdapter = new ArrayAdapter<String>(getActivity(),
-                                                 R.layout.list_item_movie,
-                                                 R.id.list_item_movie_textview,
-                                                 new ArrayList<String>());
+        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+
+
+        mMovieAdapter = new MovieAdapter(getActivity(),
+                                                 Arrays.asList(movies));
 
         //TODO: Remove this and add it in an OnStart method (after implementing menu options)
         FetchMovieTask fetchMovieTask = new FetchMovieTask();
         fetchMovieTask.execute();
 
-        // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        GridView gridView = (GridView) rootView.findViewById(R.id.gridview_movies);
+        gridView.setAdapter(mMovieAdapter);
 
         // Get a reference to the ListView, and attach this adapter to it.
-        ListView listView = (ListView) rootView.findViewById(R.id.listview_movies);
+/*        ListView listView = (ListView) rootView.findViewById(R.id.listview_movies);
         listView.setAdapter(mMovieAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                             @Override
@@ -112,7 +121,7 @@ public class MoviesFragment extends Fragment {
                                                 startActivity(showDetailActivityIntent);
                                             }
                                         }
-        );
+        );*/
 
         return rootView;
     }
@@ -286,8 +295,8 @@ public class MoviesFragment extends Fragment {
         protected void onPostExecute(String[] result) {
 
             if(result != null) {
-                mMovieAdapter.clear();
-                mMovieAdapter.addAll(result);
+               // mMovieAdapter.clear();
+ //               mMovieAdapter.addAll(result);
             }
         }
         //TODO: Delete this comment
