@@ -45,9 +45,9 @@ public class MoviesFragment extends Fragment {
     private MovieAdapter mMovieAdapter;
 
     MovieInfo[] movies = {
-            new MovieInfo("title", "2345 id", "someposterpath"),
-            new MovieInfo("title2", "345 id", "someposterpath2"),
-            new MovieInfo("title3", "45 id", "someposterpath3")
+            new MovieInfo("title", "2345 id", "/fYzpM9GmpBlIC893fNjoWCwE24H.jpg"),
+            new MovieInfo("title2", "345 id", "/5aGhaIHYuQbqlHWvWYqMCnj40y2.jpg"),
+            new MovieInfo("title3", "45 id", "/jjBgi2r5cRt36xF6iNUEhzscEcb.jpg")
     };
 
     // TODO: Rename parameter arguments, choose names that match

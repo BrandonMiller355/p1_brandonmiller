@@ -1,6 +1,8 @@
 package com.example.android.popularmovies;
 
 import android.content.Context;
+import android.graphics.Movie;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +21,12 @@ import java.util.List;
  */
 
 public class MovieAdapter extends ArrayAdapter<MovieInfo> {
+    private final static String LOG_TAG = MovieAdapter.class.getSimpleName();
+
     private Context mContext = this.getContext();
 
     public MovieAdapter(Context c, List<MovieInfo> movieInfoList) {
+
         super(c, 0, movieInfoList);
     }
 
@@ -29,9 +34,10 @@ public class MovieAdapter extends ArrayAdapter<MovieInfo> {
         return mThumbIds.length;
     }
 
-    public MovieInfo getItem(int position) {
-        return null;
-    }
+    //TODO: Delete this if possible?
+//    public MovieInfo getItem(int position) {
+//        return null;
+//    }
 
     public long getItemId(int position) {
         return 0;
@@ -69,9 +75,11 @@ public class MovieAdapter extends ArrayAdapter<MovieInfo> {
 
         //here is where it set it according to the documentation
         //imageView.setImageResource(mThumbIds[position]);
+        //imageView.setImageResource(mThumbIds[position]);
 
+        Log.v(LOG_TAG, movie.poster_path);
 
-
+        //TODO: Here is where I need to get things working
         //Picasso.with(mContext).load("http://image.tmdb.org/t/p/w185/fYzpM9GmpBlIC893fNjoWCwE24H.jpg").into(imageView);
         Picasso.with(mContext).load("http://image.tmdb.org/t/p/w185/" + movie.poster_path).into(imageView);
 
