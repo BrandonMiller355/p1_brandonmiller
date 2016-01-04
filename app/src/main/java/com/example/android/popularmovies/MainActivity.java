@@ -20,6 +20,8 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         //View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
+        //TODO: Uncomment this?
+/*
         MovieAdapter movieAdapter;
         movieAdapter = new MovieAdapter(this, new ArrayList<MovieInfo>());
         GridView gridView = (GridView) findViewById(R.id.gridview_movies);
@@ -31,6 +33,7 @@ public class MainActivity extends ActionBarActivity {
                 Toast.makeText(MainActivity.this, "" + i, Toast.LENGTH_SHORT).show();
             }
         });
+*/
 
         //TODO: uncomment this?
 /*        if (savedInstanceState == null) {
