@@ -30,9 +30,11 @@ public class MovieAdapter extends ArrayAdapter<MovieInfo> {
         super(c, 0, movieInfoList);
     }
 
-    public int getCount() {
-        return mThumbIds.length;
-    }
+    //TODO: Delete this too prolly
+//    public int getCount() {
+//        return mThumbIds.length;
+//        return super.getCount();
+//    }
 
     //TODO: Delete this if possible?
 //    public MovieInfo getItem(int position) {
@@ -94,10 +96,10 @@ public class MovieAdapter extends ArrayAdapter<MovieInfo> {
             R.drawable.sample_0, R.drawable.sample_1,
             R.drawable.sample_2, R.drawable.sample_3,
             R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7,
+            R.drawable.sample_6, R.drawable.sample_7/*,
             R.drawable.sample_0, R.drawable.sample_1,
             R.drawable.sample_2, R.drawable.sample_3,
             R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7
+            R.drawable.sample_6, R.drawable.sample_7*/
     };
 }
