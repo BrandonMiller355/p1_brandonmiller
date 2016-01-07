@@ -23,7 +23,9 @@ public class DetailActivity extends ActionBarActivity {
         setContentView(R.layout.activity_detail);
 
         //TODO: Delete this debugging line
-        Log.d(DetailActivity.class.toString(), "The text that was passed is: " + getIntent().getExtras().getString(Intent.EXTRA_TEXT));
+        Log.d(DetailActivity.class.toString(), "The text that was passed is: " + getIntent().getExtras().getString(Intent.EXTRA_TEXT)
+                + getIntent().getExtras().getString(Intent.EXTRA_UID)
+                + getIntent().getExtras().getString(Intent.EXTRA_TITLE));
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -72,6 +74,13 @@ public class DetailActivity extends ActionBarActivity {
 
             TextView textView = (TextView) rootView.findViewById(R.id.detail_text);
             textView.setText(getActivity().getIntent().getExtras().getString(Intent.EXTRA_TEXT));
+
+            TextView textView2 = (TextView) rootView.findViewById(R.id.detail_text2);
+            textView.setText(getActivity().getIntent().getExtras().getString(Intent.EXTRA_UID));
+
+            TextView textView3 = (TextView) rootView.findViewById(R.id.detail_text3);
+            textView.setText(getActivity().getIntent().getExtras().getString(Intent.EXTRA_TITLE));
+
             return rootView;
         }
     }

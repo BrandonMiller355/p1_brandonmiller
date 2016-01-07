@@ -43,6 +43,7 @@ import java.util.List;
  */
 public class MoviesFragment extends Fragment {
     private MovieAdapter mMovieAdapter;
+    private static final String LOG_TAG = MoviesFragment.class.getSimpleName();
 
 /*    MovieInfo[] movies = {
             new MovieInfo("title", "2345 id", "/fYzpM9GmpBlIC893fNjoWCwE24H.jpg"),
@@ -140,6 +141,19 @@ public class MoviesFragment extends Fragment {
 
         GridView gridView = (GridView) rootView.findViewById(R.id.gridview_movies);
         gridView.setAdapter(mMovieAdapter);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent showDetailActivityIntent = new Intent(getActivity(), DetailActivity.class)
+                        .putExtra(Intent.EXTRA_UID, mMovieAdapter.getItem(i).id)
+                        .putExtra(Intent.EXTRA_TITLE, mMovieAdapter.getItem(i).original_title)
+                        .putExtra(Intent.EXTRA_TEXT, mMovieAdapter.getItem(i).poster_path);
+                startActivity(showDetailActivityIntent);
+//                Log.v(LOG_TAG, mMovieAdapter.getItem(i).id);
+
+                //Toast.makeText(getActivity(), mMovieAdapter.getItem(i), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         // Get a reference to the ListView, and attach this adapter to it.
 /*        ListView listView = (ListView) rootView.findViewById(R.id.listview_movies);
