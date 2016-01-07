@@ -1,6 +1,7 @@
 package com.example.android.popularmovies;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -10,7 +11,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by Brandon on 12/22/2015.
@@ -76,10 +80,13 @@ public class DetailActivity extends ActionBarActivity {
             textView.setText(getActivity().getIntent().getExtras().getString(Intent.EXTRA_TEXT));
 
             TextView textView2 = (TextView) rootView.findViewById(R.id.detail_text2);
-            textView.setText(getActivity().getIntent().getExtras().getString(Intent.EXTRA_UID));
+            textView2.setText(getActivity().getIntent().getExtras().getString(Intent.EXTRA_UID));
 
             TextView textView3 = (TextView) rootView.findViewById(R.id.detail_text3);
-            textView.setText(getActivity().getIntent().getExtras().getString(Intent.EXTRA_TITLE));
+            textView3.setText(getActivity().getIntent().getExtras().getString(Intent.EXTRA_TITLE));
+
+            ImageView imageDetailView = (ImageView) rootView.findViewById(R.id.detail_image1);
+            Picasso.with(rootView.getContext()).load("http://image.tmdb.org/t/p/w185/" + textView.getText()).into(imageDetailView);
 
             return rootView;
         }
