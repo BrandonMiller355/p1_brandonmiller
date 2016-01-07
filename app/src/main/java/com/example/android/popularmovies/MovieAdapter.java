@@ -69,7 +69,7 @@ public class MovieAdapter extends ArrayAdapter<MovieInfo> {
             //imageView.setImageResource();
 //            imageView.setScaleType(ImageView.ScaleType.FIT_START);
 //            imageView.setScaleType(ImageView.ScaleType.FIT_END);
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            //imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             //imageView.setPadding(8, 8, 8, 8);
         } else {
             imageView = (ImageView) convertView;

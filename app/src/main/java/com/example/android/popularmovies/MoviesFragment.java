@@ -44,7 +44,7 @@ import java.util.List;
 public class MoviesFragment extends Fragment {
     private MovieAdapter mMovieAdapter;
 
-    MovieInfo[] movies = {
+/*    MovieInfo[] movies = {
             new MovieInfo("title", "2345 id", "/fYzpM9GmpBlIC893fNjoWCwE24H.jpg"),
             new MovieInfo("title2", "345 id", "/5aGhaIHYuQbqlHWvWYqMCnj40y2.jpg"),
             new MovieInfo("title3", "45 id", "/jjBgi2r5cRt36xF6iNUEhzscEcb.jpg"),
@@ -69,7 +69,7 @@ public class MoviesFragment extends Fragment {
             new MovieInfo("title20", "345 id", "/rSZs93P0LLxqlVEbI001UKoeCQC.jpg"),
             new MovieInfo("title20", "345 id", "/rSZs93P0LLxqlVEbI001UKoeCQC.jpg"),
             new MovieInfo("title20", "345 id", "/rSZs93P0LLxqlVEbI001UKoeCQC.jpg")
-    };
+    };*/
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -124,8 +124,19 @@ public class MoviesFragment extends Fragment {
         FetchMovieTask fetchMovieTask = new FetchMovieTask();
         fetchMovieTask.execute();
 
+
+        /*begin trying stuff:
+        *
+        * it was:
         mMovieAdapter = new MovieAdapter(getActivity(),
                                                  Arrays.asList(movies));
+
+        GridView gridView = (GridView) rootView.findViewById(R.id.gridview_movies);
+        gridView.setAdapter(mMovieAdapter);
+        *
+        * */
+
+        mMovieAdapter = new MovieAdapter(getActivity(), new ArrayList<MovieInfo>());
 
         GridView gridView = (GridView) rootView.findViewById(R.id.gridview_movies);
         gridView.setAdapter(mMovieAdapter);
@@ -146,7 +157,7 @@ public class MoviesFragment extends Fragment {
         return rootView;
     }
 
-    public class FetchMovieTask extends AsyncTask<Void, Void, String[]> {
+    public class FetchMovieTask extends AsyncTask<Void, Void, MovieInfo[]> {
 
         private final String LOG_TAG = FetchMovieTask.class.getSimpleName();
 
@@ -155,7 +166,7 @@ public class MoviesFragment extends Fragment {
 
         String moviesJsonStr = null;
 
-        private String[] getMovieDataFromJson(String moviesJsonStr, int numMovies)
+        private MovieInfo[] getMovieDataFromJson(String moviesJsonStr)
                 throws JSONException {
 
             // These are the names of the JSON objects that need to be extracted.
@@ -173,10 +184,11 @@ public class MoviesFragment extends Fragment {
             //hardcode this value above instead
             JSONArray moviesArray = moviesJSON.getJSONArray(RESULTS);
 
-            String[] resultStrs = new String[numMovies];
+            String[] resultStrs = new String[moviesArray.length()];
+            MovieInfo[] movies2 = new MovieInfo[moviesArray.length()];
 
             //for(int i = 0; i < moviesArray.length(); i++) {
-            for(int i = 0; i < numMovies; i++) {
+            for(int i = 0; i < resultStrs.length; i++) {
                 // For now, using the format "Day, description, hi/low"
                 String title;
                 String poster_path;
@@ -198,6 +210,9 @@ public class MoviesFragment extends Fragment {
                 poster_path = movieInfo.getString(POSTER_PATH);
                 id = movieInfo.getString(ID);
 
+                movies2[i] = new MovieInfo(title, id, poster_path);
+
+
 //                // description is in a child array called "weather", which is 1 element long.
 //                JSONObject movieObject = movieInfo.getJSONArray(TITLE).getJSONObject(0);
 //                description = movieObject.getString(OWM_DESCRIPTION);
@@ -209,19 +224,21 @@ public class MoviesFragment extends Fragment {
 //                double low = temperatureObject.getDouble(OWM_MIN);
 
                 //highAndLow = formatHighLows(high, low);
-                resultStrs[i] = "title: " + title + ", id: " + id + ", posterpath: " + poster_path;
+                //TODO: Change this back
+                //resultStrs[i] = "title: " + title + ", id: " + id + ", posterpath: " + poster_path;
+                resultStrs[i] = poster_path;
             }
 
             //For debugging purposes only
             for (String s : resultStrs) {
                 Log.v(LOG_TAG, "movie entry: " + s);
             }
-            return resultStrs;
+            return movies2;
 
         }
 
         @Override
-        protected String[] doInBackground(Void... params) {
+        protected MovieInfo[] doInBackground(Void... params) {
 
             //TODO: Update this if/when I pass in a param
             if (params.length != 0) {
@@ -230,7 +247,7 @@ public class MoviesFragment extends Fragment {
 
             String sortBy = "popularity.desc";
             //TODO: add this functionality
-            int numMovies = 3;
+
             String apiKey = getString(R.string.my_api_key);
 
 
@@ -302,7 +319,7 @@ public class MoviesFragment extends Fragment {
             }
 
             try {
-                return getMovieDataFromJson(moviesJsonStr, numMovies);
+                return getMovieDataFromJson(moviesJsonStr);
             } catch (JSONException e) {
                 Log.e(LOG_TAG, "Error parsing JSON string: " + moviesJsonStr +"\nError: " + e.getMessage(), e);
                 e.printStackTrace();
@@ -312,11 +329,48 @@ public class MoviesFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(String[] result) {
+        protected void onPostExecute(MovieInfo[] result) {
 
             if(result != null) {
-               // mMovieAdapter.clear();
- //               mMovieAdapter.addAll(result);
+                mMovieAdapter.clear();
+
+                // TODO: Here is where I should load that stuff ? Nope, did it above
+/*                MovieInfo[] movies = new MovieInfo[result.length];
+
+                for(int i = 0; i < result.length; i++) {
+                    movies[i].original_title = result[i];
+                    movies[i].id = result[i];
+                    movies[i].poster_path = result[i];
+                }*/
+
+                /*MovieInfo[] movies = {
+                        new MovieInfo("title", "2345 id", "/fYzpM9GmpBlIC893fNjoWCwE24H.jpg"),
+                        new MovieInfo("title2", "345 id", "/5aGhaIHYuQbqlHWvWYqMCnj40y2.jpg"),
+                        new MovieInfo("title3", "45 id", "/jjBgi2r5cRt36xF6iNUEhzscEcb.jpg"),
+                        new MovieInfo("title4", "345 id", "/D6e8RJf2qUstnfkTslTXNTUAlT.jpg"),
+                        new MovieInfo("title5", "345 id", "/kqjL17yufvn9OVLyXYpvtyrFfak.jpg"),
+                        new MovieInfo("title6", "345 id", "/fqe8JxDNO8B8QfOGTdjh6sPCdSC.jpg"),
+                        new MovieInfo("title7", "345 id", "/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg"),
+                        new MovieInfo("title8", "345 id", "/mSvpKOWbyFtLro9BjfEGqUw5dXE.jpg"),
+                        new MovieInfo("title9", "345 id", "/vgAHvS0bT3fpcpnJqT6uDTUsHTo.jpg"),
+                        new MovieInfo("title10", "345 id", "/5JU9ytZJyR3zmClGmVm9q4Geqbd.jpg"),
+                        new MovieInfo("title11", "345 id", "/oXUWEc5i3wYyFnL1Ycu8ppxxPvs.jpg"),
+                        new MovieInfo("title12", "345 id", "/50d0XQQETSyg3bwBXhC7K33pKgc.jpg"),
+                        new MovieInfo("title13", "345 id", "/q0R4crx2SehcEEQEkYObktdeFy.jpg"),
+                        new MovieInfo("title14", "345 id", "/cWERd8rgbw7bCMZlwP207HUXxym.jpg"),
+                        new MovieInfo("title15", "345 id", "/z2sJd1OvAGZLxgjBdSnQoLCfn3M.jpg"),
+                        new MovieInfo("title16", "345 id", "/aAmfIX3TT40zUHGcCKrlOZRKC7u.jpg"),
+                        new MovieInfo("title17", "345 id", "/p2SdfGmQRaw8xhFbexlHL7srMM8.jpg"),
+                        new MovieInfo("title18", "345 id", "/t90Y3G8UGQp0f0DrP60wRu9gfrH.jpg"),
+                        new MovieInfo("title19", "345 id", "/2ZckiMTfSkCep2JTtZbr73tnQbN.jpg"),
+                        new MovieInfo("title20", "345 id", "/rSZs93P0LLxqlVEbI001UKoeCQC.jpg"),
+                        new MovieInfo("title20", "345 id", "/rSZs93P0LLxqlVEbI001UKoeCQC.jpg"),
+                        new MovieInfo("title20", "345 id", "/rSZs93P0LLxqlVEbI001UKoeCQC.jpg"),
+                        new MovieInfo("title20", "345 id", "/rSZs93P0LLxqlVEbI001UKoeCQC.jpg"),
+                        new MovieInfo("title20", "345 id", "/rSZs93P0LLxqlVEbI001UKoeCQC.jpg")
+                };*/
+
+                mMovieAdapter.addAll(result);
             }
         }
         //TODO: Delete this comment
