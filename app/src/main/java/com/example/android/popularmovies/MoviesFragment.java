@@ -189,6 +189,10 @@ public class MoviesFragment extends Fragment {
             final String TITLE = "title";
             final String ID = "id";
             final String POSTER_PATH = "poster_path";
+            final String RELEASE_DATE = "release_date";
+            final String VOTE_AVERAGE = "vote_average";
+            final String PLOT_SYNOPSIS = "overview";
+
 //            final String OWM_MAX = "max";
 //            final String OWM_MIN = "min";
 //            final String OWM_DESCRIPTION = "main";
@@ -207,6 +211,9 @@ public class MoviesFragment extends Fragment {
                 String title;
                 String poster_path;
                 String id;
+                String releaseDate;
+                String voteAverage;
+                String plotSynopsis;
 
                 // Get the JSON object representing the movie
                 JSONObject movieInfo = moviesArray.getJSONObject(i);
@@ -223,8 +230,11 @@ public class MoviesFragment extends Fragment {
                 title = movieInfo.getString(TITLE);
                 poster_path = movieInfo.getString(POSTER_PATH);
                 id = movieInfo.getString(ID);
+                releaseDate = movieInfo.getString(RELEASE_DATE);
+                voteAverage = movieInfo.getString(VOTE_AVERAGE);
+                plotSynopsis = movieInfo.getString(PLOT_SYNOPSIS);
 
-                movies2[i] = new MovieInfo(title, id, poster_path);
+                movies2[i] = new MovieInfo(title, id, poster_path, releaseDate, voteAverage, plotSynopsis);
 
 
 //                // description is in a child array called "weather", which is 1 element long.
