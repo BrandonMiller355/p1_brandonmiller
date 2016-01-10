@@ -147,7 +147,10 @@ public class MoviesFragment extends Fragment {
                 Intent showDetailActivityIntent = new Intent(getActivity(), DetailActivity.class)
                         .putExtra(Intent.EXTRA_UID, mMovieAdapter.getItem(i).id)
                         .putExtra(Intent.EXTRA_TITLE, mMovieAdapter.getItem(i).original_title)
-                        .putExtra(Intent.EXTRA_TEXT, mMovieAdapter.getItem(i).poster_path);
+                        .putExtra(Intent.EXTRA_TEXT, mMovieAdapter.getItem(i).poster_path)
+                        .putExtra(Intent.EXTRA_DATA_REMOVED, mMovieAdapter.getItem(i).release_date)
+                        .putExtra(Intent.EXTRA_SUBJECT, mMovieAdapter.getItem(i).plot_synopsis)
+                        .putExtra(Intent.EXTRA_PHONE_NUMBER, mMovieAdapter.getItem(i).vote_average);
                 startActivity(showDetailActivityIntent);
 //                Log.v(LOG_TAG, mMovieAdapter.getItem(i).id);
 

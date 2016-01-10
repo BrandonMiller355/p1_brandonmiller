@@ -15,6 +15,7 @@
         android:layout_alignLeft="@+id/detail_text3"
         android:layout_alignStart="@+id/detail_text3" />
 
+<!--
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,7 +24,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/detail_image1"
         android:layout_alignStart="@+id/detail_image1"
-        android:layout_marginBottom="127dp" />
+        android:layout_marginBottom="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -33,19 +34,53 @@
         android:layout_above="@+id/detail_text"
         android:layout_alignLeft="@+id/detail_text"
         android:layout_alignStart="@+id/detail_text"
-        android:layout_marginBottom="51dp" />
+        android:layout_marginBottom="10dp" />
+-->
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/detail_text3"
         android:text="detail text 3"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="10dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="22dp"
-        android:layout_marginStart="22dp"
+        android:layout_marginStart="10dp"
         android:gravity="top|center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/releaseDate"
+        android:text="release date"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/detail_image1"
+        android:layout_alignLeft="@+id/detail_image1"
+        android:layout_alignStart="@+id/detail_image1"
+    />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/voteAverage"
+        android:text="voteAverage"
+        android:layout_below="@id/releaseDate"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@id/releaseDate"
+        android:layout_alignStart="@id/releaseDate"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/plotSynopsis"
+        android:text="plotSynopsis"
+        android:layout_below="@id/voteAverage"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@id/voteAverage"
+        android:layout_alignStart="@id/voteAverage"
+        />
 
 </RelativeLayout>

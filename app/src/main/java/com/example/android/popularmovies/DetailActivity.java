@@ -76,17 +76,28 @@ public class DetailActivity extends ActionBarActivity {
 
             View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
 
+            ImageView imageDetailView = (ImageView) rootView.findViewById(R.id.detail_image1);
+            Picasso.with(rootView.getContext()).load("http://image.tmdb.org/t/p/w185/" + getActivity().getIntent().getExtras().getString(Intent.EXTRA_TEXT)).into(imageDetailView);
+
+/*
             TextView textView = (TextView) rootView.findViewById(R.id.detail_text);
             textView.setText(getActivity().getIntent().getExtras().getString(Intent.EXTRA_TEXT));
 
             TextView textView2 = (TextView) rootView.findViewById(R.id.detail_text2);
             textView2.setText(getActivity().getIntent().getExtras().getString(Intent.EXTRA_UID));
+*/
 
             TextView textView3 = (TextView) rootView.findViewById(R.id.detail_text3);
             textView3.setText(getActivity().getIntent().getExtras().getString(Intent.EXTRA_TITLE));
 
-            ImageView imageDetailView = (ImageView) rootView.findViewById(R.id.detail_image1);
-            Picasso.with(rootView.getContext()).load("http://image.tmdb.org/t/p/w185/" + textView.getText()).into(imageDetailView);
+            TextView releaseDate = (TextView) rootView.findViewById(R.id.releaseDate);
+            releaseDate.setText(getActivity().getIntent().getExtras().getString(Intent.EXTRA_DATA_REMOVED));
+
+            TextView voteAverage = (TextView) rootView.findViewById(R.id.voteAverage);
+            voteAverage.setText(getActivity().getIntent().getExtras().getString(Intent.EXTRA_PHONE_NUMBER));
+
+            TextView plotSynopsis = (TextView) rootView.findViewById(R.id.plotSynopsis);
+            plotSynopsis.setText(getActivity().getIntent().getExtras().getString(Intent.EXTRA_SUBJECT));
 
             return rootView;
         }
