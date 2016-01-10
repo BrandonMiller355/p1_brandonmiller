@@ -6,14 +6,27 @@
     android:layout_height="match_parent"
     tools:context="com.example.android.sunshine.app.DetailActivity$PlaceholderFragment" >
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/title"
+        android:text="title"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="10dp"
+        android:gravity="top|center_horizontal" />
+
     <ImageView
         android:layout_width="185dp"
         android:layout_height="278dp"
         android:id="@+id/detail_image1"
         android:src="@drawable/sample_0"
-        android:layout_below="@+id/detail_text3"
-        android:layout_alignLeft="@+id/detail_text3"
-        android:layout_alignStart="@+id/detail_text3" />
+        android:layout_below="@+id/title"
+        android:layout_alignLeft="@+id/title"
+        android:layout_alignStart="@+id/title" />
 
 <!--
     <TextView
@@ -40,22 +53,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/detail_text3"
-        android:text="detail text 3"
-        android:layout_marginTop="10dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="22dp"
-        android:layout_marginStart="10dp"
-        android:gravity="top|center_horizontal" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/releaseDate"
         android:text="release date"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentBottom="false"
         android:layout_below="@+id/detail_image1"
         android:layout_alignLeft="@+id/detail_image1"
         android:layout_alignStart="@+id/detail_image1"
@@ -67,7 +67,7 @@
         android:id="@+id/voteAverage"
         android:text="voteAverage"
         android:layout_below="@id/releaseDate"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentBottom="false"
         android:layout_alignLeft="@id/releaseDate"
         android:layout_alignStart="@id/releaseDate"
         />
@@ -81,6 +81,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@id/voteAverage"
         android:layout_alignStart="@id/voteAverage"
-        />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
 
 </RelativeLayout>

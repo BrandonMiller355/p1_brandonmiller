@@ -87,17 +87,21 @@ public class DetailActivity extends ActionBarActivity {
             textView2.setText(getActivity().getIntent().getExtras().getString(Intent.EXTRA_UID));
 */
 
-            TextView textView3 = (TextView) rootView.findViewById(R.id.detail_text3);
-            textView3.setText(getActivity().getIntent().getExtras().getString(Intent.EXTRA_TITLE));
+            TextView title = (TextView) rootView.findViewById(R.id.title);
+            title.setText(getActivity().getIntent().getExtras().getString(Intent.EXTRA_TITLE));
 
             TextView releaseDate = (TextView) rootView.findViewById(R.id.releaseDate);
-            releaseDate.setText(getActivity().getIntent().getExtras().getString(Intent.EXTRA_DATA_REMOVED));
+            releaseDate.setText("Release Date: "
+                    + getActivity().getIntent().getExtras().getString(Intent.EXTRA_DATA_REMOVED));
 
             TextView voteAverage = (TextView) rootView.findViewById(R.id.voteAverage);
-            voteAverage.setText(getActivity().getIntent().getExtras().getString(Intent.EXTRA_PHONE_NUMBER));
+            voteAverage.setText("Vote Average: "
+                    + getActivity().getIntent().getExtras().getString(Intent.EXTRA_PHONE_NUMBER)
+                    + "/10.00");
 
             TextView plotSynopsis = (TextView) rootView.findViewById(R.id.plotSynopsis);
-            plotSynopsis.setText(getActivity().getIntent().getExtras().getString(Intent.EXTRA_SUBJECT));
+            plotSynopsis.setText("Description: "
+                    + getActivity().getIntent().getExtras().getString(Intent.EXTRA_SUBJECT));
 
             return rootView;
         }
