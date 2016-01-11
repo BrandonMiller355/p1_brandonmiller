@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="sortbyEntries">
+        <item>Popularity</item>
+        <item>Highest Rated</item>
+    </string-array>
+
+    <string-array name="sortbyEntryValues">
+        <item>popularity.desc</item>
+        <item>rating.desc</item>
+    </string-array>
+
+</resources>
