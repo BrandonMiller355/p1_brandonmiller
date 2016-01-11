@@ -2,9 +2,11 @@ package com.example.android.popularmovies;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.format.Time;
 import android.util.Log;
@@ -115,6 +117,12 @@ public class MoviesFragment extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        UpdateMovies();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -122,8 +130,8 @@ public class MoviesFragment extends Fragment {
 
         // It okay to put this before the adapter?
         //TODO: Remove this and add it in an OnStart method (after implementing menu options)
-        FetchMovieTask fetchMovieTask = new FetchMovieTask();
-        fetchMovieTask.execute();
+//        FetchMovieTask fetchMovieTask = new FetchMovieTask();
+//        fetchMovieTask.execute();
 
 
         /*begin trying stuff:
@@ -172,6 +180,11 @@ public class MoviesFragment extends Fragment {
         );*/
 
         return rootView;
+    }
+
+    public void UpdateMovies() {
+        FetchMovieTask fetchMovieTask = new FetchMovieTask();
+        fetchMovieTask.execute();
     }
 
     public class FetchMovieTask extends AsyncTask<Void, Void, MovieInfo[]> {
@@ -272,11 +285,12 @@ public class MoviesFragment extends Fragment {
                 Log.e(LOG_TAG, "Incorrect number of params passed to refresh operation.");
             }
 
-            String sortBy = "popularity.desc";
-            //TODO: add this functionality
+
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            String sortBy = sharedPreferences.getString(getString(R.string.pref_sortby_key),
+                    getString(R.string.pref_sortby_default));
 
             String apiKey = getString(R.string.my_api_key);
-
 
             try {
                 final String BASE_URL = "http://api.themoviedb.org/3/discover/movie?";
