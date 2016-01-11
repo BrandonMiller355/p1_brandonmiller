@@ -9,6 +9,9 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -76,26 +79,29 @@ public class MoviesFragment extends Fragment {
                         .putExtra(Intent.EXTRA_SUBJECT, mMovieAdapter.getItem(i).plot_synopsis)
                         .putExtra(Intent.EXTRA_PHONE_NUMBER, mMovieAdapter.getItem(i).vote_average);
                 startActivity(showDetailActivityIntent);
-//                Log.v(LOG_TAG, mMovieAdapter.getItem(i).id);
-
-                //Toast.makeText(getActivity(), mMovieAdapter.getItem(i), Toast.LENGTH_SHORT).show();
             }
         });
 
-        // Get a reference to the ListView, and attach this adapter to it.
-/*        ListView listView = (ListView) rootView.findViewById(R.id.listview_movies);
-        listView.setAdapter(mMovieAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                            @Override
-                                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                                Intent showDetailActivityIntent = new Intent(getActivity(),DetailActivity.class)
-                                                        .putExtra(Intent.EXTRA_TEXT, mMovieAdapter.getItem(position));
-                                                startActivity(showDetailActivityIntent);
-                                            }
-                                        }
-        );*/
-
         return rootView;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.moviesfragment, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+/*        //noinspection SimplifiableIfStatement
+        if (id == R.id.) {
+            UpdateWeather();
+            return true;
+        }*/
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void UpdateMovies() {
@@ -116,7 +122,6 @@ public class MoviesFragment extends Fragment {
                 throws JSONException {
 
             // These are the names of the JSON objects that need to be extracted.
-            //TODO: Update these
             final String RESULTS = "results";
             final String TITLE = "title";
             final String ID = "id";
@@ -125,20 +130,13 @@ public class MoviesFragment extends Fragment {
             final String VOTE_AVERAGE = "vote_average";
             final String PLOT_SYNOPSIS = "overview";
 
-//            final String OWM_MAX = "max";
-//            final String OWM_MIN = "min";
-//            final String OWM_DESCRIPTION = "main";
-
             JSONObject moviesJSON = new JSONObject(moviesJsonStr);
-            //TODO: It breaks here probably
-            //hardcode this value above instead
             JSONArray moviesArray = moviesJSON.getJSONArray(RESULTS);
 
-            String[] resultStrs = new String[moviesArray.length()];
             MovieInfo[] movies2 = new MovieInfo[moviesArray.length()];
 
             //for(int i = 0; i < moviesArray.length(); i++) {
-            for(int i = 0; i < resultStrs.length; i++) {
+            for(int i = 0; i < moviesArray.length(); i++) {
                 // For now, using the format "Day, description, hi/low"
                 String title;
                 String poster_path;
@@ -168,27 +166,11 @@ public class MoviesFragment extends Fragment {
 
                 movies2[i] = new MovieInfo(title, id, poster_path, releaseDate, voteAverage, plotSynopsis);
 
-
-//                // description is in a child array called "weather", which is 1 element long.
-//                JSONObject movieObject = movieInfo.getJSONArray(TITLE).getJSONObject(0);
-//                description = movieObject.getString(OWM_DESCRIPTION);
-
-                // Temperatures are in a child object called "temp".  Try not to name variables
-                // "temp" when working with temperature.  It confuses everybody.
-//                JSONObject temperatureObject = movieInfo.getJSONObject(OWM_TEMPERATURE);
-//                double high = temperatureObject.getDouble(OWM_MAX);
-//                double low = temperatureObject.getDouble(OWM_MIN);
-
-                //highAndLow = formatHighLows(high, low);
                 //TODO: Change this back
                 //resultStrs[i] = "title: " + title + ", id: " + id + ", posterpath: " + poster_path;
-                resultStrs[i] = poster_path;
+                //resultStrs[i] = poster_path;
             }
 
-            //For debugging purposes only
-            for (String s : resultStrs) {
-                Log.v(LOG_TAG, "movie entry: " + s);
-            }
             return movies2;
 
         }
