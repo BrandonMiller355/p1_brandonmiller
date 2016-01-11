@@ -8,5 +8,5 @@ android:numColumns="auto_fit"
 android:verticalSpacing="0dp"
 android:horizontalSpacing="0dp"
 android:stretchMode="columnWidth"
-tools:context=".MainActivity$ForecastFragment"
+tools:context=".MainActivity$MoviesFragment"
 android:id="@+id/gridview_movies" />

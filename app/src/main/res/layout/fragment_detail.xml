@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.android.sunshine.app.DetailActivity$PlaceholderFragment" >
+    tools:context="com.example.android.popularmovies.app.DetailActivity$DetailFragment" >
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,28 +27,6 @@
         android:layout_below="@+id/title"
         android:layout_alignLeft="@+id/title"
         android:layout_alignStart="@+id/title" />
-
-<!--
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/detail_text"
-        android:text="detail text 1"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/detail_image1"
-        android:layout_alignStart="@+id/detail_image1"
-        android:layout_marginBottom="10dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/detail_text2"
-        android:text="detail text 2"
-        android:layout_above="@+id/detail_text"
-        android:layout_alignLeft="@+id/detail_text"
-        android:layout_alignStart="@+id/detail_text"
-        android:layout_marginBottom="10dp" />
--->
 
     <TextView
         android:layout_width="wrap_content"

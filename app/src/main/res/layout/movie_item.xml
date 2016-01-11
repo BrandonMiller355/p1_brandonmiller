@@ -5,11 +5,5 @@
     <ImageView
     android:layout_width="185dp"
     android:layout_height="278dp"
-
-        android:id="@+id/image_movie"/>
-    <!--android:layout_width="200dp"-->
-    <!--android:layout_height="200dp"-->
-    <!--android:scaleType="fitXY"-->
-    <!--android:adjustViewBounds="true"-->
-    
+    android:id="@+id/image_movie"/>
 </FrameLayout>

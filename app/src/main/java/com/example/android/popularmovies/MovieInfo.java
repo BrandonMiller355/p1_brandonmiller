@@ -11,7 +11,12 @@ public class MovieInfo {
     String vote_average;
     String plot_synopsis;
 
-    public MovieInfo(String original_title, String id, String poster_path, String release_date, String vote_average, String plot_synopsis) {
+    public MovieInfo(String original_title,
+                     String id,
+                     String poster_path,
+                     String release_date,
+                     String vote_average,
+                     String plot_synopsis) {
         this.original_title = original_title;
         this.id = id;
         this.poster_path = poster_path;

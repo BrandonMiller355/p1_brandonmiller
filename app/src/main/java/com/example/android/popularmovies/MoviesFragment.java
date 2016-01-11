@@ -95,12 +95,6 @@ public class MoviesFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-/*        //noinspection SimplifiableIfStatement
-        if (id == R.id.) {
-            UpdateWeather();
-            return true;
-        }*/
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -133,12 +127,9 @@ public class MoviesFragment extends Fragment {
             JSONObject moviesJSON = new JSONObject(moviesJsonStr);
             JSONArray moviesArray = moviesJSON.getJSONArray(RESULTS);
 
-            //TODO: Rename this variable
-            MovieInfo[] movies2 = new MovieInfo[moviesArray.length()];
+            MovieInfo[] movies = new MovieInfo[moviesArray.length()];
 
-            //for(int i = 0; i < moviesArray.length(); i++) {
             for(int i = 0; i < moviesArray.length(); i++) {
-                // For now, using the format "Day, description, hi/low"
                 String title;
                 String poster_path;
                 String id;
@@ -156,25 +147,19 @@ public class MoviesFragment extends Fragment {
                 voteAverage = movieInfo.getString(VOTE_AVERAGE);
                 plotSynopsis = movieInfo.getString(PLOT_SYNOPSIS);
 
-                movies2[i] = new MovieInfo(title, id, poster_path, releaseDate, voteAverage, plotSynopsis);
-
-                //TODO: Change this back
-                //resultStrs[i] = "title: " + title + ", id: " + id + ", posterpath: " + poster_path;
-                //resultStrs[i] = poster_path;
+                movies[i] = new MovieInfo(title,
+                        id,
+                        poster_path,
+                        releaseDate,
+                        voteAverage,
+                        plotSynopsis);
             }
 
-            return movies2;
-
+            return movies;
         }
 
         @Override
         protected MovieInfo[] doInBackground(Void... params) {
-
-            //TODO: Update this if/when I pass in a param
-            if (params.length != 0) {
-                Log.e(LOG_TAG, "Incorrect number of params passed to refresh operation.");
-            }
-
 
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
             String sortBy = sharedPreferences.getString(getString(R.string.pref_sortby_key),
@@ -185,24 +170,18 @@ public class MoviesFragment extends Fragment {
             try {
                 final String BASE_URL = "http://api.themoviedb.org/3/discover/movie?";
                 Log.v(LOG_TAG, getString(R.string.my_api_key));
-                //example Url = "http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=[yourapikey]";
+                //example URL:
+                // http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=[yourapikey]
                 final String SORT_BY_PARAM = "sort_by";
                 final String API_KEY_PARAM = "api_key";
 
-                //TODO: Update this
                 Uri uri = Uri.parse(BASE_URL).buildUpon()
-                        //.appendQueryParameter(POSTAL_CODE_PARAM, params[0])
                         .appendQueryParameter(SORT_BY_PARAM, sortBy)
-                        //.appendQueryParameter(COUNT_PARAM, Integer.toString(numMovies))
                         .appendQueryParameter(API_KEY_PARAM, apiKey)
                         .build();
 
-                // For debugging purposes only
-                Log.v(LOG_TAG, "The built url is: " + uri.toString());
-
                 URL url = new URL(uri.toString());
 
-                //urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
                 urlConnection.connect();
@@ -228,9 +207,6 @@ public class MoviesFragment extends Fragment {
                 }
 
                 moviesJsonStr = stringBuffer.toString();
-
-                // For debugging purposes only.
-                Log.v(LOG_TAG, moviesJsonStr);
 
             } catch (IOException e) {
                 Log.e(LOG_TAG, "Error ", e);
@@ -261,7 +237,6 @@ public class MoviesFragment extends Fragment {
 
         @Override
         protected void onPostExecute(MovieInfo[] result) {
-
             if(result != null) {
                 mMovieAdapter.clear();
                 mMovieAdapter.addAll(result);
