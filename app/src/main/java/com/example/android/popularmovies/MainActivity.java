@@ -39,11 +39,11 @@ public class MainActivity extends ActionBarActivity {
 */
 
         //TODO: uncomment this?
-/*        if (savedInstanceState == null) {
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new MoviesFragment())
                     .commit();
-        }*/
+        }
 
 //        MoviesFragment.FetchMovieTask fetchMovieTask = new MoviesFragment.FetchMovieTask();
 //        fetchMovieTask.execute();

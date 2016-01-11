@@ -9,6 +9,6 @@
 
     <string name="pref_sortby_label">Sort By</string>
     <string name="pref_sortby_key">sortby</string>
-    <string name="pref_sortby_default">pop</string>
+    <string name="pref_sortby_default">popularity.desc</string>
 
 </resources>

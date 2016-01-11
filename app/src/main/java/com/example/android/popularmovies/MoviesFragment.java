@@ -62,9 +62,9 @@ public class MoviesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-
         mMovieAdapter = new MovieAdapter(getActivity(), new ArrayList<MovieInfo>());
+
+        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         GridView gridView = (GridView) rootView.findViewById(R.id.gridview_movies);
         gridView.setAdapter(mMovieAdapter);
@@ -133,6 +133,7 @@ public class MoviesFragment extends Fragment {
             JSONObject moviesJSON = new JSONObject(moviesJsonStr);
             JSONArray moviesArray = moviesJSON.getJSONArray(RESULTS);
 
+            //TODO: Rename this variable
             MovieInfo[] movies2 = new MovieInfo[moviesArray.length()];
 
             //for(int i = 0; i < moviesArray.length(); i++) {
@@ -147,15 +148,6 @@ public class MoviesFragment extends Fragment {
 
                 // Get the JSON object representing the movie
                 JSONObject movieInfo = moviesArray.getJSONObject(i);
-
-                // The date/time is returned as a long.  We need to convert that
-                // into something human-readable, since most people won't read "1400356800" as
-                // "this saturday".
-                long dateTime;
-                // Cheating to convert this to UTC time, which is what we want anyhow
-
-                //dateTime = dayTime.setJulianDay(julianStartDay+i);
-                //day = getReadableDateString(dateTime);
 
                 title = movieInfo.getString(TITLE);
                 poster_path = movieInfo.getString(POSTER_PATH);
@@ -272,62 +264,8 @@ public class MoviesFragment extends Fragment {
 
             if(result != null) {
                 mMovieAdapter.clear();
-
-                // TODO: Here is where I should load that stuff ? Nope, did it above
-/*                MovieInfo[] movies = new MovieInfo[result.length];
-
-                for(int i = 0; i < result.length; i++) {
-                    movies[i].original_title = result[i];
-                    movies[i].id = result[i];
-                    movies[i].poster_path = result[i];
-                }*/
-
-                /*MovieInfo[] movies = {
-                        new MovieInfo("title", "2345 id", "/fYzpM9GmpBlIC893fNjoWCwE24H.jpg"),
-                        new MovieInfo("title2", "345 id", "/5aGhaIHYuQbqlHWvWYqMCnj40y2.jpg"),
-                        new MovieInfo("title3", "45 id", "/jjBgi2r5cRt36xF6iNUEhzscEcb.jpg"),
-                        new MovieInfo("title4", "345 id", "/D6e8RJf2qUstnfkTslTXNTUAlT.jpg"),
-                        new MovieInfo("title5", "345 id", "/kqjL17yufvn9OVLyXYpvtyrFfak.jpg"),
-                        new MovieInfo("title6", "345 id", "/fqe8JxDNO8B8QfOGTdjh6sPCdSC.jpg"),
-                        new MovieInfo("title7", "345 id", "/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg"),
-                        new MovieInfo("title8", "345 id", "/mSvpKOWbyFtLro9BjfEGqUw5dXE.jpg"),
-                        new MovieInfo("title9", "345 id", "/vgAHvS0bT3fpcpnJqT6uDTUsHTo.jpg"),
-                        new MovieInfo("title10", "345 id", "/5JU9ytZJyR3zmClGmVm9q4Geqbd.jpg"),
-                        new MovieInfo("title11", "345 id", "/oXUWEc5i3wYyFnL1Ycu8ppxxPvs.jpg"),
-                        new MovieInfo("title12", "345 id", "/50d0XQQETSyg3bwBXhC7K33pKgc.jpg"),
-                        new MovieInfo("title13", "345 id", "/q0R4crx2SehcEEQEkYObktdeFy.jpg"),
-                        new MovieInfo("title14", "345 id", "/cWERd8rgbw7bCMZlwP207HUXxym.jpg"),
-                        new MovieInfo("title15", "345 id", "/z2sJd1OvAGZLxgjBdSnQoLCfn3M.jpg"),
-                        new MovieInfo("title16", "345 id", "/aAmfIX3TT40zUHGcCKrlOZRKC7u.jpg"),
-                        new MovieInfo("title17", "345 id", "/p2SdfGmQRaw8xhFbexlHL7srMM8.jpg"),
-                        new MovieInfo("title18", "345 id", "/t90Y3G8UGQp0f0DrP60wRu9gfrH.jpg"),
-                        new MovieInfo("title19", "345 id", "/2ZckiMTfSkCep2JTtZbr73tnQbN.jpg"),
-                        new MovieInfo("title20", "345 id", "/rSZs93P0LLxqlVEbI001UKoeCQC.jpg"),
-                        new MovieInfo("title20", "345 id", "/rSZs93P0LLxqlVEbI001UKoeCQC.jpg"),
-                        new MovieInfo("title20", "345 id", "/rSZs93P0LLxqlVEbI001UKoeCQC.jpg"),
-                        new MovieInfo("title20", "345 id", "/rSZs93P0LLxqlVEbI001UKoeCQC.jpg"),
-                        new MovieInfo("title20", "345 id", "/rSZs93P0LLxqlVEbI001UKoeCQC.jpg")
-                };*/
-
                 mMovieAdapter.addAll(result);
             }
         }
-        //TODO: Delete this comment
-        //end of pasted stuff
     }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-//    public interface OnFragmentInteractionListener {
-//        // TODO: Update argument type and name
-//        void onFragmentInteraction(Uri uri);
-//    }
 }

@@ -1,7 +1,6 @@
 package com.example.android.popularmovies;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -25,11 +24,6 @@ public class DetailActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-
-        //TODO: Delete this debugging line
-        Log.d(DetailActivity.class.toString(), "The text that was passed is: " + getIntent().getExtras().getString(Intent.EXTRA_TEXT)
-                + getIntent().getExtras().getString(Intent.EXTRA_UID)
-                + getIntent().getExtras().getString(Intent.EXTRA_TITLE));
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -59,12 +53,8 @@ public class DetailActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-        //return true;
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
     public static class DetailFragment extends Fragment {
 
         public DetailFragment() {
@@ -77,15 +67,9 @@ public class DetailActivity extends ActionBarActivity {
             View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
 
             ImageView imageDetailView = (ImageView) rootView.findViewById(R.id.detail_image1);
-            Picasso.with(rootView.getContext()).load("http://image.tmdb.org/t/p/w185/" + getActivity().getIntent().getExtras().getString(Intent.EXTRA_TEXT)).into(imageDetailView);
-
-/*
-            TextView textView = (TextView) rootView.findViewById(R.id.detail_text);
-            textView.setText(getActivity().getIntent().getExtras().getString(Intent.EXTRA_TEXT));
-
-            TextView textView2 = (TextView) rootView.findViewById(R.id.detail_text2);
-            textView2.setText(getActivity().getIntent().getExtras().getString(Intent.EXTRA_UID));
-*/
+            Picasso.with(rootView.getContext()).load("http://image.tmdb.org/t/p/w185/"
+                    + getActivity().getIntent().getExtras().getString(Intent.EXTRA_TEXT))
+                    .into(imageDetailView);
 
             TextView title = (TextView) rootView.findViewById(R.id.title);
             title.setText(getActivity().getIntent().getExtras().getString(Intent.EXTRA_TITLE));

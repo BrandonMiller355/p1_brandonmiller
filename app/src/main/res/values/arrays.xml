@@ -8,7 +8,7 @@
 
     <string-array name="sortbyEntryValues">
         <item>popularity.desc</item>
-        <item>rating.desc</item>
+        <item>vote_average.desc</item>
     </string-array>
 
 </resources>
