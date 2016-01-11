@@ -1,6 +1,5 @@
 package com.example.android.popularmovies;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -8,16 +7,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,12 +22,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.GenericArrayType;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 
 /**
@@ -47,73 +39,14 @@ public class MoviesFragment extends Fragment {
     private MovieAdapter mMovieAdapter;
     private static final String LOG_TAG = MoviesFragment.class.getSimpleName();
 
-/*    MovieInfo[] movies = {
-            new MovieInfo("title", "2345 id", "/fYzpM9GmpBlIC893fNjoWCwE24H.jpg"),
-            new MovieInfo("title2", "345 id", "/5aGhaIHYuQbqlHWvWYqMCnj40y2.jpg"),
-            new MovieInfo("title3", "45 id", "/jjBgi2r5cRt36xF6iNUEhzscEcb.jpg"),
-            new MovieInfo("title4", "345 id", "/D6e8RJf2qUstnfkTslTXNTUAlT.jpg"),
-            new MovieInfo("title5", "345 id", "/kqjL17yufvn9OVLyXYpvtyrFfak.jpg"),
-            new MovieInfo("title6", "345 id", "/fqe8JxDNO8B8QfOGTdjh6sPCdSC.jpg"),
-            new MovieInfo("title7", "345 id", "/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg"),
-            new MovieInfo("title8", "345 id", "/mSvpKOWbyFtLro9BjfEGqUw5dXE.jpg"),
-            new MovieInfo("title9", "345 id", "/vgAHvS0bT3fpcpnJqT6uDTUsHTo.jpg"),
-            new MovieInfo("title10", "345 id", "/5JU9ytZJyR3zmClGmVm9q4Geqbd.jpg"),
-            new MovieInfo("title11", "345 id", "/oXUWEc5i3wYyFnL1Ycu8ppxxPvs.jpg"),
-            new MovieInfo("title12", "345 id", "/50d0XQQETSyg3bwBXhC7K33pKgc.jpg"),
-            new MovieInfo("title13", "345 id", "/q0R4crx2SehcEEQEkYObktdeFy.jpg"),
-            new MovieInfo("title14", "345 id", "/cWERd8rgbw7bCMZlwP207HUXxym.jpg"),
-            new MovieInfo("title15", "345 id", "/z2sJd1OvAGZLxgjBdSnQoLCfn3M.jpg"),
-            new MovieInfo("title16", "345 id", "/aAmfIX3TT40zUHGcCKrlOZRKC7u.jpg"),
-            new MovieInfo("title17", "345 id", "/p2SdfGmQRaw8xhFbexlHL7srMM8.jpg"),
-            new MovieInfo("title18", "345 id", "/t90Y3G8UGQp0f0DrP60wRu9gfrH.jpg"),
-            new MovieInfo("title19", "345 id", "/2ZckiMTfSkCep2JTtZbr73tnQbN.jpg"),
-            new MovieInfo("title20", "345 id", "/rSZs93P0LLxqlVEbI001UKoeCQC.jpg"),
-            new MovieInfo("title20", "345 id", "/rSZs93P0LLxqlVEbI001UKoeCQC.jpg"),
-            new MovieInfo("title20", "345 id", "/rSZs93P0LLxqlVEbI001UKoeCQC.jpg"),
-            new MovieInfo("title20", "345 id", "/rSZs93P0LLxqlVEbI001UKoeCQC.jpg"),
-            new MovieInfo("title20", "345 id", "/rSZs93P0LLxqlVEbI001UKoeCQC.jpg")
-    };*/
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    //private OnFragmentInteractionListener mListener;
-
     public MoviesFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MoviesFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-//    public static MoviesFragment newInstance(String param1, String param2) {
-//        MoviesFragment fragment = new MoviesFragment();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -127,23 +60,6 @@ public class MoviesFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-
-        // It okay to put this before the adapter?
-        //TODO: Remove this and add it in an OnStart method (after implementing menu options)
-//        FetchMovieTask fetchMovieTask = new FetchMovieTask();
-//        fetchMovieTask.execute();
-
-
-        /*begin trying stuff:
-        *
-        * it was:
-        mMovieAdapter = new MovieAdapter(getActivity(),
-                                                 Arrays.asList(movies));
-
-        GridView gridView = (GridView) rootView.findViewById(R.id.gridview_movies);
-        gridView.setAdapter(mMovieAdapter);
-        *
-        * */
 
         mMovieAdapter = new MovieAdapter(getActivity(), new ArrayList<MovieInfo>());
 
